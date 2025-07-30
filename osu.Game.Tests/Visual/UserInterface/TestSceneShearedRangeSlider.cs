@@ -107,6 +107,17 @@ namespace osu.Game.Tests.Visual.UserInterface
         }
 
         [Test]
+        [Explicit]
+        public void TestDifferentRange()
+        {
+            AddStep("Adjust range", () =>
+            {
+                customEnd.MinValue = 5;
+                customEnd.MaxValue = 15;
+            });
+        }
+
+        [Test]
         public void TestAdjustRangeClickOutsideNub()
         {
             Vector2 lowerBoundNub = Vector2.Zero;

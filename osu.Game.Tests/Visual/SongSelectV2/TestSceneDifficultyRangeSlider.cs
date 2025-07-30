@@ -23,10 +23,10 @@ namespace osu.Game.Tests.Visual.SongSelectV2
             Precision = 0.1f
         };
 
-        private readonly BindableNumber<double> customEnd = new BindableNumber<double>(10)
+        private readonly BindableNumber<double> customEnd = new BindableNumber<double>(10.1)
         {
-            MinValue = 0,
-            MaxValue = 10,
+            MinValue = 0.1,
+            MaxValue = 10.1,
             Precision = 0.1f
         };
 

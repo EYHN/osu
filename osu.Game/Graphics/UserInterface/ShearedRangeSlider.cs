@@ -142,6 +142,7 @@ namespace osu.Game.Graphics.UserInterface
                                     d.DefaultString = DefaultStringUpperBound;
                                     d.NubWidth = NubWidth;
                                     d.Current = upperBound;
+                                    d.MinDisplayRange = lowerBound.MinValue;
                                 }),
                                 LowerBoundSlider = CreateBoundSlider(false).With(d =>
                                 {
@@ -150,6 +151,7 @@ namespace osu.Game.Graphics.UserInterface
                                     d.DefaultString = DefaultStringLowerBound;
                                     d.NubWidth = NubWidth;
                                     d.Current = lowerBound;
+                                    d.MaxDisplayRange = upperBound.MaxValue;
                                 }),
                                 UpperBoundSlider.Nub.CreateProxy(),
                                 LowerBoundSlider.Nub.CreateProxy(),
@@ -166,6 +168,14 @@ namespace osu.Game.Graphics.UserInterface
 
             LowerBoundSlider.Current.ValueChanged += min => UpperBoundSlider.Current.Value = Math.Max(min.NewValue + minRange, UpperBoundSlider.Current.Value);
             UpperBoundSlider.Current.ValueChanged += max => LowerBoundSlider.Current.Value = Math.Min(max.NewValue - minRange, LowerBoundSlider.Current.Value);
+            lowerBound.MaxValueChanged += _ => UpdateDisplayRange();
+            upperBound.MaxValueChanged += _ => UpdateDisplayRange();
+        }
+
+        protected void UpdateDisplayRange()
+        {
+            UpperBoundSlider.MinDisplayRange = lowerBound.MinValue;
+            LowerBoundSlider.MaxDisplayRange = upperBound.MaxValue;
         }
 
         protected virtual BoundSliderBar CreateBoundSlider(bool isUpper) => new BoundSliderBar(this, isUpper);
@@ -175,7 +185,7 @@ namespace osu.Game.Graphics.UserInterface
             private readonly ShearedRangeSlider rangeSlider;
             private readonly bool isUpper;
 
-            public new float NormalizedValue => base.NormalizedValue;
+            public new float NormalizedPosition => base.NormalizedPosition;
 
             public new ShearedNub Nub => base.Nub;
 

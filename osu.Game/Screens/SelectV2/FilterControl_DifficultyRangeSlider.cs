@@ -109,8 +109,8 @@ namespace osu.Game.Screens.SelectV2
 
             private void updateBorderDisplay(bool instant)
             {
-                float borderStart = LowerBoundSlider.NormalizedValue * LowerBoundSlider.UsableWidth / LowerBoundSlider.DrawWidth;
-                float borderEnd = UpperBoundSlider.NormalizedValue * UpperBoundSlider.UsableWidth / UpperBoundSlider.DrawWidth;
+                float borderStart = LowerBoundSlider.NormalizedPosition * LowerBoundSlider.UsableWidth / LowerBoundSlider.DrawWidth;
+                float borderEnd = UpperBoundSlider.NormalizedPosition * UpperBoundSlider.UsableWidth / UpperBoundSlider.DrawWidth;
                 borderEnd += UpperBoundSlider.NubWidth / UpperBoundSlider.DrawWidth * 2;
 
                 borderContainer.MoveToX(borderStart, instant ? 0 : 250, Easing.OutQuint);
